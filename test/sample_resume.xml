@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<resume>
+  <candidate>John Smith</candidate>
+  <address>
+    <street1>12345 Sixth Street</street1>
+    <city>Somewhere</city>
+    <state>FL</state>
+    <zip>12345</zip>
+    <phone>(800) 555-1212 (cell)</phone>
+    <email>jsmith@jsmith.info</email>
+  </address>
+  <!-- String as many of these along as you need to -->
+  <education>
+    <institution name = "Sanford Technical and Financial University">
+      <major>CS</major>
+      <degree>BS</degree>
+      <gpa>2.9</gpa>
+      <start>Jun 1987</start>
+      <end>Dec 1991</end>
+    </institution>
+  </education>
+  <employment>
+    <!-- String as many of these along as you need to -->
+    <!-- If you're still at your current job, set the end-date to the future
+    and the formatters will notice it and set the date to "Current" (Skill
+    formatter calculated skills will also still be correct.) -->
+    <position company = "BIM"> <!-- Bruce Ide Manufacturing, obviously -->
+      <title>Junior Hydration Engineer Assistant</title>
+      <location>Somewhere, FL</location>
+      <start>Jan 2004</start>
+      <end>Mar 2008</end>
+      <description>Timely routine deliveries of dihydrogen monoxide to essential personnel.</description>
+      <skills>
+	<skill>Time management</skill>
+	<skill>Water delivery</skill>
+      </skills>
+      <responsibilities>
+	<responsibility>Deliver dihydrogen monoxide where needed</responsibility>
+      </responsibilities>
+      <achievements>
+	<achievement>Delivered dihydrogen monoxide to president of company</achievement>
+      </achievements>
+    </position>
+    <position company = "BACME Ergonomic Office Equipment">
+      <title>Office Intern</title>
+      <location>Rochester, NY</location>
+      <start>Jan 2003</start>
+      <end>Nov 2003</end>
+      <description>Intern Stuff</description>
+      <skills>
+	<skill>Interning</skill>
+      </skills>
+      <responsibilities>
+	<responsibility>Get coffee for people</responsibility>
+      </responsibilities>
+      <achievements>
+	<achievement>Got coffee for some guy</achievement>
+      </achievements>
+    </position>
+  </employment>
+</resume>

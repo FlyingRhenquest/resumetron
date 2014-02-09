@@ -1,0 +1,89 @@
+Copyright 2014 Bruce Ide
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-----------------------------------------------------------------------
+
+This is a resume generation program. Please note that I'm a programmer
+and not an English Major, so I'm making no warranty that this is a
+particularly good resume format and no claims about its usefulness
+for applying for a job. It's basically me investigating the issues
+behind maintaining my resume in a single format and translating it to
+other formats in an automated and hopefully consistent fashion.
+
+This tool will take a resume in an XML file (See the directory
+test/sample_resume.xml) and output it in a variety of markup
+languages. Currently it supports plain text and LaTeX. I plan
+to write an HTML formatter for it at some point in the future,
+as well.
+
+The plain text output has no options other than input file. The
+LaTeX emitter can be set to collapse positions prior to a specific
+date, collapse all positions (by setting that date in the future)
+or display the full text of all positions. In case you want employers
+to know all the details about how you were a roadie for Bon Jovi
+in the '80s.
+
+This tool requires my time and cppxml libraries (available on
+github) as well as boost's program-options and regex ones. I
+compiled it with gcc 4.9.0, although any version 4.7.2 or later
+should work. A C++11-compliant Clang may also work (But you'll
+need to modify the makefile.)
+
+Build by putting my cppxml and time libraries in ${HOME}/sandbox
+and then running make in resumetron/resumetron. resumetron -h will
+give you details on running the application. Possible output formats
+are latex and text (Anything unknown will default to text)
+
+Dates are specified (in the resume and command line) as the three
+letter abbreviation for month and year. All positions are assumed
+to start from the first of the month. All dates are translated into
+a POSIX time (Seconds from Jan 1, 1970.) The skill formatter
+accumulates durations in seconds and then computes years by
+dividing by the number of seconds in a year.
+
+If you're still working your current job, set its end date in the
+future. The formatters will pick that up and substitute "Present."
+The skill formatter will also compute the duration until "now"
+based on the system clock, so if you set the end date 20 years
+in the future, you won't get an extra couple of decades on current
+skills.
+
+Note that job collapsing works on end date, not start date. 
+So if you have a job that went from 2000 to mid-2005 and you specify
+-c "Jan 2005" as a resumetron flag, that job will get a full
+description. This may or may not be what you want.
+
+The page numbering package I use will probably require you to run
+LaTeX twice in order for the page numbers to be correct. Be sure
+to double-check that prior to sending your resume out.
+
+If you don't set responsibilities separately (I prefer to put them
+in the job description), be sure to use a command line flag of -r false.
+Otherwise you'll get empty enumerations (I'll try to fix this sooner
+rather than later, since it should be a simple test for an empty
+vector.)
+
+I have some todos for factoring markup into separate functions than
+text output. This should avoid a lot of duplicated code that only
+differs in markup formatting. This ought not to break any new formatters
+if someone else wants to write one.
+
+I may end up writing a formatter to emit SQL to inject a resume into
+a database. It'd be neat if I could construct a query along the lines
+of "give me all resumes where someone has more than 10 years of C++
+experience and 5 years of C++ experience in the last 10 years."
+
+Due to skill formatter aggregation, you should make sure your skills
+are consistent. Case matters ("Shell Scripting" and "shell scripting" 
+will make two different skills.)
